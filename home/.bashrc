@@ -131,4 +131,11 @@ venv_cd () {
 alias cd="venv_cd"
 
 
+
+
+# homeshick stuff
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+homeshick --quiet refresh
+source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+
+
