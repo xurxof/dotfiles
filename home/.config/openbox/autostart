@@ -78,7 +78,8 @@ xset b off &
 #(sleep 120s && cb-fortune) &
 
 #dual monitor
-xrandr --output VGA-1 --mode 1280x1024 --pos 1920x128 --rotate normal --output DVI-I-1 --mode 1920x1080 --pos 0x0 --rotate normal
+xrandr --output VGA-1 --mode 1280x1024 --pos 1920x0 --rotate normal --output DVI-I-1 --mode 1920x1080 --pos 0x0 --rotate normal
+
 
 ## Run the conky
 (sleep 5 & conky -q) &

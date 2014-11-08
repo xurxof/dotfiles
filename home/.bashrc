@@ -224,11 +224,14 @@ if ! shopt -oq posix; then
 fi
 
 
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/repo
+source /usr/local/bin/virtualenvwrapper.sh
+
 # virtualenv autoactivation 
 # as in https://github.com/justinabrahms/jlilly-bashy-dotfiles/commit/04899f005397499e89da6d562b062545e70d7975 
 
-source /etc/bash_completion.d/virtualenvwrapper
-
+#source /etc/bash_completion.d/virtualenvwrapper
 
 has_virtualenv() {
   if [ -e .venv ]; then
