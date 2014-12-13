@@ -254,3 +254,15 @@ homeshick --quiet refresh
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 
 
+PERL_MB_OPT="--install_base \"/home/xurxo/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/xurxo/perl5"; export PERL_MM_OPT;
+
+
+# ToDo stuff
+
+source ~/ownCloud/personal/todo/todo_completion
+export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+export TODOTXT_DEFAULT_ACTION=ls
+alias todo='~/ownCloud/personal/todo/todo.sh -d ~/ownCloud/personal/todo/.todo.cfg'
+complete -F _todo todo
+

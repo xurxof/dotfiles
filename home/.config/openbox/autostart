@@ -28,10 +28,14 @@ hsetroot -solid "#2E3436" &
 ## 2. compositor - start
 ## 3. sleep - give compositor time to start
 ## 4. tint2 panel
+#(\
+#nitrogen --restore && \
+#cb-compositor --start && \
+#sleep 2s && \
+#tint2 \
+#) &
 (\
 nitrogen --restore && \
-cb-compositor --start && \
-sleep 2s && \
 tint2 \
 ) &
 
@@ -82,7 +86,9 @@ xrandr --output VGA-1 --mode 1280x1024 --pos 1920x0 --rotate normal --output DVI
 
 
 ## Run the conky
-(sleep 5 & conky -q) &
+(sleep 5 & conky -c .config/.conkyrc ) &
+## Run the conky
+(sleep 5 & conky -c .config/.conkyextrarc ) &
 
 ## Keyboard layout switcher
 fbxkb &

@@ -1,6 +1,7 @@
 [user]
-	name = xurxo
-	email = xurxof@gmail.com
+  name = xurxo
+  email = xurxof@gmail.com
+
 [color]
   diff = auto
   status = auto
@@ -10,6 +11,7 @@
   pager = true
 
 [alias]
-    log = lg --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
-
+[diff]
+  tool = vimdiff

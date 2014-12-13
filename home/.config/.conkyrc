@@ -16,7 +16,7 @@
 ##############################################
 background no
 use_xft yes
-xftfont Inconsolata:size=10
+xftfont Input Mono Condensed:size=8
 xftalpha 1
 update_interval 1.0
 total_run_times 0
@@ -26,12 +26,12 @@ own_window_type override
 #own_window_argb_visual yes
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
-minimum_size 0 0
+minimum_size 2000 0
 maximum_width 3000
 draw_shades no
 draw_outline no
 draw_borders no
-draw_graph_borders no
+draw_graph_borders yes
 default_color FFFFFF
 default_shade_color 000000
 default_outline_color 828282
@@ -41,9 +41,9 @@ gap_y 5
 no_buffers yes
 uppercase no
 cpu_avg_samples 2
-override_utf8_locale no
+override_utf8_locale yes
 ##############################################
-#  Output
+#  Output  
 ##############################################
 TEXT 
- Uptime: $uptime RAM:$mem/$memmax Swap:$swap/$swapmax Disk:${fs_used /}/${fs_size /} CPU: ${cpu cpu0}%
+ ${Time %a %e/%m %k:%M} | Uptime: $uptime_short | RAM: $mem | Disk: ${fs_used /}/${fs_size /} | CPU: ${cpu cpu0}% ${cpugraph cpu0 10,100 FFFFFF} | I/O ${diskio} ${goto 700} R ${diskiograph_read 10,50} W ${diskiograph_write 10,50} | ↓: ${downspeedf eth0}  ${downspeedgraph eth0 10,100} ↑: ${upspeedf eth0} ${upspeedgraph eth0 10, 100} | @adeq → | soprt@adeq

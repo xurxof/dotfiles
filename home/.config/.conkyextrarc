@@ -1,0 +1,132 @@
+# conky configuration
+#
+# The list of variables has been removed from this file in favour
+# of keeping the documentation more maintainable.
+# Check http://conky.sf.net for an up-to-date-list.
+#
+# For ideas about how to modify conky, please see:
+# http://crunchbanglinux.org/forums/topic/59/my-conky-config/
+#
+# For help with conky, please see:
+# http://crunchbanglinux.org/forums/topic/2047/conky-help/
+#
+# Enjoy! :)
+##############################################
+# Settings
+##############################################
+background no
+use_xft yes
+xftfont Input Mono Condensed:size=9
+xftalpha 1
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_transparent no
+own_window_type override
+#own_window_argb_visual yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 370 900
+maximum_width 360
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+default_color FFFFFF
+default_shade_color 000000
+default_outline_color 828282
+alignment top_right
+gap_x 10
+gap_y 45
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+override_utf8_locale yes
+short_units on
+top_name_width 20
+color1 white
+color2 darkgrey
+color3 orange
+
+lua_load ~/.config/lua/text_calendar.lua
+##############################################
+#  Output  
+##############################################
+TEXT 
+Uptime: ${uptime}
+Pending updates: 
+CPU ${color2}${hr 1}${color1}
+${goto 30}${cpu cpu0}%${color2}${goto 80}1: ${cpu cpu1}%${goto 150}2: ${cpu cpu2}%${goto 220}3: ${cpu cpu3}%${goto 290}4: ${cpu cpu4}%${color1}
+${cpubar cpu0 5,60} ${color2}${cpubar cpu1 5,60} ${cpubar cpu2 5,60} ${cpubar cpu3 5,60} ${cpubar cpu4 5,60}${color1}
+${cpugraph cpu0 20,60 -t} ${color2}${cpugraph cpu1 20,60 -t} ${cpugraph cpu2 20,60 -t} ${cpugraph cpu3 20,60 -t} ${cpugraph cpu4 20,60 -t}${color1}
+Proc: ${running_processes} ${alignr}Thread: ${running_threads}
+TOP CPU${color2}${hr 1}${color1}
+${top name 1} ${top cpu 1}%  ${top user 1}${alignr}${top pid 1}
+${top name 2} ${top cpu 2}%  ${top user 2}${alignr}${top pid 2}
+${top name 3} ${top cpu 3}%  ${top user 3}${alignr}${top pid 3}
+${top name 4} ${top cpu 4}%  ${top user 4}${alignr}${top pid 4}
+${top name 5} ${top cpu 5}%  ${top user 5}${alignr}${top pid 5}
+${top name 6} ${top cpu 6}%  ${top user 6}${alignr}${top pid 6}
+
+IO ${color2}${hr 1}${color1}
+mount ${goto 100}R${goto 150}W${goto 210}used${goto 280}R${goto 335}W
+${color2}
+/ ${goto 60}sdb1 		${goto 100}${diskio_read sdb1}${goto 150}${diskio_write sdb1}${goto 210}${fs_used_perc /}% 						${goto 250}${diskiograph_read sdb1 10,50} ${diskiograph_write sdb1 10,50}
+/home${goto 60}sdc1 	${goto 100}${diskio_read sdc1}${goto 150}${diskio_write sdc1}${goto 210}${fs_used_perc /home}%					${goto 250}${diskiograph_read sdc1 10,50} ${diskiograph_write sdc1 10,50}
+/dwnlds${goto 60}sda1 	${goto 100}${diskio_read sda1}${goto 150}${diskio_write sda1}${goto 210}${fs_used_perc /home/xurxo/downloads}%	${goto 250}${diskiograph_read sda1 10,50} ${diskiograph_write sda1 10,50}
+/todo${goto 60}sde1 	${goto 100}${diskio_read sdf1}${goto 150}${diskio_write sdf1}${goto 210}${fs_used_perc /media/Todo}%			${goto 250}${diskiograph_read sdf1 10,50} ${diskiograph_write sdf1 10,50}
+/mirror${goto 60}sdd1 	${goto 100}${diskio_read sdd1}${goto 150}${diskio_write sdd1}${goto 210}${fs_used_perc /media/Mirror}%			${goto 250}${diskiograph_read sdd1 10,50} ${diskiograph_write sdd1 10,50}
+#/p${goto 60}sdg1 		${goto 100}${diskio_read sdg1}${goto 150}${diskio_write sdg1}${goto 210}${fs_used_perc /media/prv}%				${goto 250}${diskiograph_read sdg1 10,50} ${alignr}${diskiograph_write sdg1 10,50}
+# Alternative: ${if_mounted /media/Todo}Used ${color2}${fs_used_perc /media/Todo}% - Free ${fs_free /media/Todo}${else}Unmounted${endif}
+${color1}${goto 60} 	${goto 100}${diskio_read }${goto 150}${diskio_write }${goto 210}			${goto 250}${diskiograph_read 10,50} ${diskiograph_write 10,50}
+
+TOP IO ${color2}${hr 1}${color1}
+${top_io name 1} ${top_io io_perc 1}%  ${top_io user 1}${alignr}${top_io pid 1}
+${top_io name 2} ${top_io io_perc 2}%  ${top_io user 2}${alignr}${top_io pid 2}
+${top_io name 3} ${top_io io_perc 3}%  ${top_io user 3}${alignr}${top_io pid 3}
+${top_io name 4} ${top_io io_perc 4}%  ${top_io user 4}${alignr}${top_io pid 4}
+
+MEM ${color2}${hr 1}${color1}
+RAM $mem Free ${memfree} ${alignr} Easy ${memeasyfree} ${alignr}$memperc% ${membar 10,50}
+#SW   $swap  ${alignr}$swapperc% ${swapbar 5,30}
+
+TOP MEM ${color2}${hr 1}${color1}
+${top_mem name 1} ${top_mem mem 1}%  ${top_mem user 1}${alignr}${top_mem pid 1}
+${top_mem name 2} ${top_mem mem 2}%  ${top_mem user 2}${alignr}${top_mem pid 2} 
+${top_mem name 3} ${top_mem mem 3}%  ${top_mem user 3}${alignr}${top_mem pid 3}
+${top_mem name 4} ${top_mem mem 4}%  ${top_mem user 4}${alignr}${top_mem pid 4}
+
+
+TOP NET ${color2}${hr 1}${color1}
+${gw_iface} | IP: ${addr eth0} | Gate: ${gw_ip}
+Up: ${upspeed eth0}ko/s ${totalup eth0}${alignr}Down: ${downspeed eth0}ko/s ${totaldown eth0}
+${upspeedgraph eth0 20,160}${alignr}${downspeedgraph eth0 20,160}
+
+CALENDAR ${color2}${hr 1}${color1}
+${lua_parse text_calendar dname=t  }
+${voffset -85}${lua_parse text_calendar month=1  dname=t pos=170}
+
+#MAIL ${color2}${hr 1}${color1}
+# http://ubuntuforums.org/showthread.php?t=876859
+# http://ubuntuforums.org/showthread.php?t=869771
+TODO ${color2}${hr 1}${color1}
+# see https://github.com/ginatrapani/todo.txt-cli/wiki/Linux-with-Conky
+${execpi 6000 /home/xurxo/ownCloud/personal/todo/todo.sh -d /home/xurxo/ownCloud/personal/todo/.config-conky -p ls}
+BACKUP ${color2}${hr 1}${color1} Last mirror: ${execi 6000 tail -n 1 ~/log/mirrorsync.log}
+Last backup: 
+${execi 6000 tail -n 1 ~/log/rsnapshot.log}
+RASPI ${color2}${hr 1}${color1}
+RSS ${color2}${hr 1}${color1}
+${if_existing /proc/net/route eth0}${rss http://meneame.feedsportal.com/rss 1 item_titles 5}${else}${color1}${alignc}** Meneame no disponible **${endif}
+
+${alignc}Fortune
+${color2}${hr 1}${color1}
+${color2}${color1}${execi 600 fortune fortunes} 
+
+AUDIO ${color2}${hr 1}${color1}
+${offset 599}${voffset 12}MPD ($mpd_status): $mpd_elapsed / $mpd_length
+${offset 599}${mpd_bar 5,390}
+${offset 599}$mpd_artist — $mpd_title
+${voffset -220}
+
+/
