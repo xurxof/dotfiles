@@ -26,8 +26,8 @@ own_window_type override
 #own_window_argb_visual yes
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
-minimum_size 2000 0
-maximum_width 3000
+minimum_size 2000 20
+maximum_width 1920
 draw_shades no
 draw_outline no
 draw_borders no
@@ -46,4 +46,4 @@ override_utf8_locale yes
 #  Output  
 ##############################################
 TEXT 
- ${Time %a %e/%m %k:%M} | Uptime: $uptime_short | RAM: $mem | Disk: ${fs_used /}/${fs_size /} | CPU: ${cpu cpu0}% ${cpugraph cpu0 10,100 FFFFFF} | I/O ${diskio} ${goto 700} R ${diskiograph_read 10,50} W ${diskiograph_write 10,50} | ↓: ${downspeedf eth0}  ${downspeedgraph eth0 10,100} ↑: ${upspeedf eth0} ${upspeedgraph eth0 10, 100} | @adeq → | soprt@adeq
+ ${Time %a %e/%m %k:%M} | Uptime: $uptime_short | Load: ${loadavg 2} | Used RAM: $mem ($memperc%) | Disk: ${fs_used /}/${fs_size /} | CPU: ${cpu cpu0}% ${goto 650}${cpugraph cpu0 10,100 FFFFFF} | I/O ${diskio} ${goto 850}R ${diskiograph_read 10,50} W ${diskiograph_write 10,50} |  ↓: ${downspeedf eth0}  ${downspeedgraph eth0 10,100} ↑: ${upspeedf eth0} ${upspeedgraph eth0 10, 100} |  Updates: ${execi 3600 aptitude search "~U" | wc -l | tail}

@@ -87,8 +87,8 @@ xrandr --output VGA-1 --mode 1280x1024 --pos 1920x0 --rotate normal --output DVI
 
 ## Run the conky
 (sleep 5 & conky -c .config/.conkyrc ) &
-## Run the conky
-(sleep 5 & conky -c .config/.conkyextrarc ) &
+(sleep 15 & conky -c .config/.conkyextrarc ) &
+(sleep 20 & conky -c .config/.conkyextra2rc ) &
 
 ## Keyboard layout switcher
 fbxkb &

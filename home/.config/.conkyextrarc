@@ -14,7 +14,7 @@
 ##############################################
 # Settings
 ##############################################
-background no
+background no 
 use_xft yes
 xftfont Input Mono Condensed:size=9
 xftalpha 1
@@ -42,8 +42,8 @@ no_buffers yes
 uppercase no
 cpu_avg_samples 2
 override_utf8_locale yes
-short_units on
 top_name_width 20
+text_buffer_size 900
 color1 white
 color2 darkgrey
 color3 orange
@@ -53,8 +53,7 @@ lua_load ~/.config/lua/text_calendar.lua
 #  Output  
 ##############################################
 TEXT 
-Uptime: ${uptime}
-Pending updates: 
+Uptime: ${uptime}  Pending updates:  ${execi 50000 aptitude search "~U" | wc -l}
 CPU ${color2}${hr 1}${color1}
 ${goto 30}${cpu cpu0}%${color2}${goto 80}1: ${cpu cpu1}%${goto 150}2: ${cpu cpu2}%${goto 220}3: ${cpu cpu3}%${goto 290}4: ${cpu cpu4}%${color1}
 ${cpubar cpu0 5,60} ${color2}${cpubar cpu1 5,60} ${cpubar cpu2 5,60} ${cpubar cpu3 5,60} ${cpubar cpu4 5,60}${color1}
@@ -71,11 +70,11 @@ ${top name 6} ${top cpu 6}%  ${top user 6}${alignr}${top pid 6}
 IO ${color2}${hr 1}${color1}
 mount ${goto 100}R${goto 150}W${goto 210}used${goto 280}R${goto 335}W
 ${color2}
-/ ${goto 60}sdb1 		${goto 100}${diskio_read sdb1}${goto 150}${diskio_write sdb1}${goto 210}${fs_used_perc /}% 						${goto 250}${diskiograph_read sdb1 10,50} ${diskiograph_write sdb1 10,50}
-/home${goto 60}sdc1 	${goto 100}${diskio_read sdc1}${goto 150}${diskio_write sdc1}${goto 210}${fs_used_perc /home}%					${goto 250}${diskiograph_read sdc1 10,50} ${diskiograph_write sdc1 10,50}
+/ ${goto 60}sdc1 		${goto 100}${diskio_read sdc1}${goto 150}${diskio_write sdc1}${goto 210}${fs_used_perc /}% 						${goto 250}${diskiograph_read sdc1 10,50} ${diskiograph_write sdc1 10,50}
+/home${goto 60}sdc1 	${goto 100}${diskio_read sde1}${goto 150}${diskio_write sde1}${goto 210}${fs_used_perc /home}%					${goto 250}${diskiograph_read sde1 10,50} ${diskiograph_write sde1 10,50}
 /dwnlds${goto 60}sda1 	${goto 100}${diskio_read sda1}${goto 150}${diskio_write sda1}${goto 210}${fs_used_perc /home/xurxo/downloads}%	${goto 250}${diskiograph_read sda1 10,50} ${diskiograph_write sda1 10,50}
-/todo${goto 60}sde1 	${goto 100}${diskio_read sdf1}${goto 150}${diskio_write sdf1}${goto 210}${fs_used_perc /media/Todo}%			${goto 250}${diskiograph_read sdf1 10,50} ${diskiograph_write sdf1 10,50}
-/mirror${goto 60}sdd1 	${goto 100}${diskio_read sdd1}${goto 150}${diskio_write sdd1}${goto 210}${fs_used_perc /media/Mirror}%			${goto 250}${diskiograph_read sdd1 10,50} ${diskiograph_write sdd1 10,50}
+/todo${goto 60}sdd1 	${goto 100}${diskio_read sdd1}${goto 150}${diskio_write sdd1}${goto 210}${fs_used_perc /media/Todo}%			${goto 250}${diskiograph_read sdd1 10,50} ${diskiograph_write sdd1 10,50}
+/mirror${goto 60}sdb1 	${goto 100}${diskio_read sdb1}${goto 150}${diskio_write sdb1}${goto 210}${fs_used_perc /media/Mirror}%			${goto 250}${diskiograph_read sdb1 10,50} ${diskiograph_write sdb1 10,50}
 #/p${goto 60}sdg1 		${goto 100}${diskio_read sdg1}${goto 150}${diskio_write sdg1}${goto 210}${fs_used_perc /media/prv}%				${goto 250}${diskiograph_read sdg1 10,50} ${alignr}${diskiograph_write sdg1 10,50}
 # Alternative: ${if_mounted /media/Todo}Used ${color2}${fs_used_perc /media/Todo}% - Free ${fs_free /media/Todo}${else}Unmounted${endif}
 ${color1}${goto 60} 	${goto 100}${diskio_read }${goto 150}${diskio_write }${goto 210}			${goto 250}${diskiograph_read 10,50} ${diskiograph_write 10,50}
@@ -87,7 +86,8 @@ ${top_io name 3} ${top_io io_perc 3}%  ${top_io user 3}${alignr}${top_io pid 3}
 ${top_io name 4} ${top_io io_perc 4}%  ${top_io user 4}${alignr}${top_io pid 4}
 
 MEM ${color2}${hr 1}${color1}
-RAM $mem Free ${memfree} ${alignr} Easy ${memeasyfree} ${alignr}$memperc% ${membar 10,50}
+RAM Use $mem ($memperc%) ${membar 7,50}
+    Free ${memfree} Easy ${memeasyfree} ${voffset -16}${offset 10}${memgraph 20,137}
 #SW   $swap  ${alignr}$swapperc% ${swapbar 5,30}
 
 TOP MEM ${color2}${hr 1}${color1}
@@ -96,37 +96,17 @@ ${top_mem name 2} ${top_mem mem 2}%  ${top_mem user 2}${alignr}${top_mem pid 2}
 ${top_mem name 3} ${top_mem mem 3}%  ${top_mem user 3}${alignr}${top_mem pid 3}
 ${top_mem name 4} ${top_mem mem 4}%  ${top_mem user 4}${alignr}${top_mem pid 4}
 
-
 TOP NET ${color2}${hr 1}${color1}
 ${gw_iface} | IP: ${addr eth0} | Gate: ${gw_ip}
-Up: ${upspeed eth0}ko/s ${totalup eth0}${alignr}Down: ${downspeed eth0}ko/s ${totaldown eth0}
-${upspeedgraph eth0 20,160}${alignr}${downspeedgraph eth0 20,160}
+Down: ${downspeed eth0} ${totaldown eth0}${alignr}Up: ${upspeed eth0} ${totalup eth0}
+${downspeedgraph eth0 20,160 ffffff ffffff } ${alignr}${upspeedgraph eth0 20,160}
 
-CALENDAR ${color2}${hr 1}${color1}
-${lua_parse text_calendar dname=t  }
-${voffset -85}${lua_parse text_calendar month=1  dname=t pos=170}
 
-#MAIL ${color2}${hr 1}${color1}
-# http://ubuntuforums.org/showthread.php?t=876859
-# http://ubuntuforums.org/showthread.php?t=869771
-TODO ${color2}${hr 1}${color1}
-# see https://github.com/ginatrapani/todo.txt-cli/wiki/Linux-with-Conky
-${execpi 6000 /home/xurxo/ownCloud/personal/todo/todo.sh -d /home/xurxo/ownCloud/personal/todo/.config-conky -p ls}
-BACKUP ${color2}${hr 1}${color1} Last mirror: ${execi 6000 tail -n 1 ~/log/mirrorsync.log}
-Last backup: 
-${execi 6000 tail -n 1 ~/log/rsnapshot.log}
+BACKUP ${color2}${hr 1}${color1}
+Last mirror: ${execi 6000 tail -n 1 ~/log/mirrorsync.log}
+Last backup: ${execi 6000 tail -n 1 ~/log/rsnapshot.log}
+#${execi 30 tail -n3 /var/log/messages | fold -w50}
+
 RASPI ${color2}${hr 1}${color1}
-RSS ${color2}${hr 1}${color1}
-${if_existing /proc/net/route eth0}${rss http://meneame.feedsportal.com/rss 1 item_titles 5}${else}${color1}${alignc}** Meneame no disponible **${endif}
+${texeci 60 ssh raspi 'conky -c .config/.conkyrc  -i 1'}
 
-${alignc}Fortune
-${color2}${hr 1}${color1}
-${color2}${color1}${execi 600 fortune fortunes} 
-
-AUDIO ${color2}${hr 1}${color1}
-${offset 599}${voffset 12}MPD ($mpd_status): $mpd_elapsed / $mpd_length
-${offset 599}${mpd_bar 5,390}
-${offset 599}$mpd_artist — $mpd_title
-${voffset -220}
-
-/
